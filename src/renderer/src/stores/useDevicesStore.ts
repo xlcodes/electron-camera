@@ -29,8 +29,10 @@ const useDevicesStore = defineStore(
       steamIsLoading: false
     })
 
-    const changePageType = (type: PageTypeEnum) => {
+    const changePageType = async (type: PageTypeEnum) => {
       devicesData.pageType = type
+      // 重新获取设备
+      await getDeviceList()
     }
 
     const changeDevices = (deviceId: string) => {

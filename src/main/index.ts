@@ -8,12 +8,12 @@ import './drag'
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
-    width: 300,
-    height: 300,
-    minWidth: 250,
-    minHeight: 250,
-    maxHeight: 500,
-    maxWidth: 500,
+    width: 280,
+    height: 280,
+    minWidth: 240,
+    minHeight: 240,
+    maxHeight: 360,
+    maxWidth: 360,
     x: 1350,
     y: 100,
     show: false,
