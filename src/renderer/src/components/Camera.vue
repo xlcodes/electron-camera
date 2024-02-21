@@ -1,5 +1,7 @@
 <template>
   <main
+    v-loading="devicesData.steamIsLoading"
+    element-loading-text="数据流加载ing..."
     class="w-screen h-screen flex overflow-hidden"
     :class="{ 'rounded-full': devicesData.round }"
     :style="cameraStyle"

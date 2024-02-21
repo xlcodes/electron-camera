@@ -12,6 +12,7 @@ interface DevicesOpt {
   borderWidth: number
   borderColor: string
   round: boolean // 是否为圆角
+  steamIsLoading: boolean // 数据流加载状态
 }
 
 const useDevicesStore = defineStore(
@@ -24,7 +25,8 @@ const useDevicesStore = defineStore(
       id: '',
       borderColor: '#ffffff',
       borderWidth: 0,
-      round: true
+      round: true,
+      steamIsLoading: false
     })
 
     const changePageType = (type: PageTypeEnum) => {
@@ -41,6 +43,7 @@ const useDevicesStore = defineStore(
     }
 
     const getCameraSteam = (el: HTMLVideoElement) => {
+      devicesData.steamIsLoading = true
       const constraints: MediaStreamConstraints = {
         audio: false,
         video: {
@@ -52,9 +55,13 @@ const useDevicesStore = defineStore(
 
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         el.srcObject = stream
-        el.play().catch((err) => {
-          console.log('视频播放失败: ', err)
-        })
+        el.play()
+          .catch((err) => {
+            console.log('视频播放失败: ', err)
+          })
+          .finally(() => {
+            devicesData.steamIsLoading = false
+          })
       })
     }
 
