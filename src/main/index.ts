@@ -3,19 +3,35 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+import './ipcMain'
+
 function createWindow(): void {
-  // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 300,
+    height: 300,
+    minWidth: 250,
+    minHeight: 250,
+    maxHeight: 500,
+    maxWidth: 500,
+    x: 1350,
+    y: 100,
     show: false,
     autoHideMenuBar: true,
+    alwaysOnTop: true,
+    transparent: true,
+    frame: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     }
   })
+
+  // 打开开发者工具
+  mainWindow.webContents.openDevTools()
+
+  // 按 1:1 比例缩放
+  mainWindow.setAspectRatio(1)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
