@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { reactive, ref } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 
 export enum PageTypeEnum {
   CAMERA = 'camera',
@@ -40,9 +40,44 @@ const useDevicesStore = defineStore(
       deviceList.value = devices.filter((d) => d.kind.includes('video'))
     }
 
+    const getCameraSteam = (el: HTMLVideoElement) => {
+      const constraints: MediaStreamConstraints = {
+        audio: false,
+        video: {
+          deviceId: devicesData!.id,
+          width: 1920,
+          height: 1080
+        }
+      }
+
+      navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+        el.srcObject = stream
+        el.play()
+      })
+    }
+
+    const destroyCameraStream = (el: HTMLVideoElement) => {
+      const videoStream = el.srcObject
+      el.pause()
+      const tracks = (videoStream as MediaProvider).getTracks() // videoStream 替换成你获取到的视频流对象
+      tracks.forEach((track) => track.stop())
+    }
+
     const changeCameraRound = () => {
       devicesData.round = !devicesData.round
     }
+
+    const deviceChangeEvent = (event) => {
+      console.log(event)
+    }
+
+    onMounted(() => {
+      window.addEventListener('devicechange', deviceChangeEvent)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('devicechange', deviceChangeEvent)
+    })
 
     return {
       devicesData,
@@ -50,7 +85,9 @@ const useDevicesStore = defineStore(
       changePageType,
       changeDevices,
       getDeviceList,
-      changeCameraRound
+      changeCameraRound,
+      getCameraSteam,
+      destroyCameraStream
     }
   },
   {

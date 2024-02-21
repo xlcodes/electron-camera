@@ -21,6 +21,7 @@ import { storeToRefs } from 'pinia'
 
 const videoRef = ref<HTMLVideoElement>()
 const devicesStore = useDevicesStore()
+const { getCameraSteam, destroyCameraStream } = useDevicesStore()
 const { devicesData } = storeToRefs(devicesStore)
 
 const cameraStyle = computed(() => {
@@ -28,22 +29,10 @@ const cameraStyle = computed(() => {
 })
 
 onMounted(() => {
-  const constraints: MediaStreamConstraints = {
-    audio: false,
-    video: {
-      deviceId: devicesData!.id,
-      width: 1920,
-      height: 1080
-    }
-  }
-
-  navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
-    videoRef.value!.srcObject = stream
-    videoRef.value!.play()
-  })
+  getCameraSteam(videoRef.value!)
 })
 
 onBeforeUnmount(() => {
-  videoRef.value!.pause()
+  destroyCameraStream(videoRef.value!)
 })
 </script>
