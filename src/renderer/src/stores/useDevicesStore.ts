@@ -52,32 +52,35 @@ const useDevicesStore = defineStore(
 
       navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
         el.srcObject = stream
-        el.play()
+        el.play().catch((err) => {
+          console.log('视频播放失败: ', err)
+        })
       })
+    }
+
+    const cameraVideoPlay = () => {
+      const videoEl: HTMLVideoElement = document.querySelector('#videoEl')!
+      if (!videoEl.paused) return
+      videoEl.play().catch((err) => {
+        console.log('视频播放失败: ', err)
+      })
+    }
+    const cameraVideoPause = () => {
+      const videoEl: HTMLVideoElement = document.querySelector('#videoEl')!
+      if (videoEl.paused) return
+      videoEl.pause()
     }
 
     const destroyCameraStream = (el: HTMLVideoElement) => {
       const videoStream = el.srcObject
       el.pause()
-      const tracks = (videoStream as MediaProvider).getTracks() // videoStream 替换成你获取到的视频流对象
+      const tracks = videoStream!.getTracks() // videoStream 替换成你获取到的视频流对象
       tracks.forEach((track) => track.stop())
     }
 
     const changeCameraRound = () => {
       devicesData.round = !devicesData.round
     }
-
-    const deviceChangeEvent = (event) => {
-      console.log(event)
-    }
-
-    onMounted(() => {
-      window.addEventListener('devicechange', deviceChangeEvent)
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('devicechange', deviceChangeEvent)
-    })
 
     return {
       devicesData,
@@ -87,7 +90,9 @@ const useDevicesStore = defineStore(
       getDeviceList,
       changeCameraRound,
       getCameraSteam,
-      destroyCameraStream
+      destroyCameraStream,
+      cameraVideoPause,
+      cameraVideoPlay
     }
   },
   {

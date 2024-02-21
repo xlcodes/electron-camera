@@ -3,16 +3,19 @@ import {
   Picture,
   PictureRounded,
   Setting as SettingIcon,
-  VideoCamera
+  VideoCamera,
+  VideoPlay,
+  VideoPause
 } from '@element-plus/icons-vue'
+import { onMounted } from 'vue'
 import useDevicesStore, { PageTypeEnum } from './stores/useDevicesStore'
 import Camera from './components/Camera.vue'
 import Setting from './components/Setting.vue'
-import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const { changePageType, getDeviceList, changeCameraRound } = useDevicesStore()
 const devicesStore = useDevicesStore()
+const { cameraVideoPause, cameraVideoPlay } = useDevicesStore()
 const { devicesData } = storeToRefs(devicesStore)
 
 const quit = () => {
@@ -53,6 +56,12 @@ onMounted(async () => {
           <PictureRounded v-if="devicesData.round" />
           <Picture v-else-if="!devicesData.round" />
         </el-icon>
+        <el-icon class="text-white opacity-80 ml-3" size="24" @click="cameraVideoPlay"
+          ><VideoPlay
+        /></el-icon>
+        <el-icon class="text-white opacity-80 ml-3" size="24" @click="cameraVideoPause"
+          ><VideoPause
+        /></el-icon>
       </section>
       <section>
         <Setting v-if="devicesData.pageType === PageTypeEnum.SETTING" />

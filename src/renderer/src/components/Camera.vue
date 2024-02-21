@@ -6,6 +6,7 @@
   >
     <video
       v-if="devicesData.pageType === PageTypeEnum.CAMERA"
+      id="videoEl"
       ref="videoRef"
       class="object-cover h-full"
       :class="{ 'rounded-full': devicesData.round }"
