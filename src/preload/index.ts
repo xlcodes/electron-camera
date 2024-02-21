@@ -5,6 +5,10 @@ import { electronAPI } from '@electron-toolkit/preload'
 const api = {
   quit: () => {
     ipcRenderer.send('app_quit')
+  },
+  drag: (opt: { x: number; y: number }) => {
+    console.log('预加载脚本：', opt.x, opt.y)
+    ipcRenderer.invoke('drag', opt)
   }
 }
 

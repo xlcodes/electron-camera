@@ -18,8 +18,8 @@
     </el-select>
     <el-input-number
       v-model="devicesData.borderWidth"
-      min="0"
-      max="16"
+      :min="0"
+      :max="16"
       class="mb-4 w-full"
       placeholder="请输入摄像头边框"
     />

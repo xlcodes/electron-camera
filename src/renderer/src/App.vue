@@ -12,6 +12,9 @@ import useDevicesStore, { PageTypeEnum } from './stores/useDevicesStore'
 import Camera from './components/Camera.vue'
 import Setting from './components/Setting.vue'
 import { storeToRefs } from 'pinia'
+import useDrag from './lib/drag'
+
+const { drag } = useDrag()
 
 const { changePageType, getDeviceList, changeCameraRound } = useDevicesStore()
 const devicesStore = useDevicesStore()
@@ -56,12 +59,12 @@ onMounted(async () => {
           <PictureRounded v-if="devicesData.round" />
           <Picture v-else-if="!devicesData.round" />
         </el-icon>
-        <el-icon class="text-white opacity-80 ml-3" size="24" @click="cameraVideoPlay"
-          ><VideoPlay
-        /></el-icon>
-        <el-icon class="text-white opacity-80 ml-3" size="24" @click="cameraVideoPause"
-          ><VideoPause
-        /></el-icon>
+        <el-icon class="text-white opacity-80 ml-3" size="24" @click="cameraVideoPlay">
+          <VideoPlay />
+        </el-icon>
+        <el-icon class="text-white opacity-80 ml-3" size="24" @click="cameraVideoPause">
+          <VideoPause />
+        </el-icon>
       </section>
       <section>
         <Setting v-if="devicesData.pageType === PageTypeEnum.SETTING" />

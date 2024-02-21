@@ -6,3 +6,10 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+interface Window {
+  api: {
+    quit: () => void
+    drag: (point: { x: number; y: number }) => void
+  }
+}
