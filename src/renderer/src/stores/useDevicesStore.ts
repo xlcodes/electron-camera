@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 export enum PageTypeEnum {
   CAMERA = 'camera',
@@ -79,9 +79,9 @@ const useDevicesStore = defineStore(
     }
 
     const destroyCameraStream = (el: HTMLVideoElement) => {
-      const videoStream = el.srcObject
+      const videoStream: MediaStream = el.srcObject as MediaStream
       el.pause()
-      const tracks = videoStream!.getTracks() // videoStream 替换成你获取到的视频流对象
+      const tracks = videoStream.getTracks() // videoStream 替换成你获取到的视频流对象
       tracks.forEach((track) => track.stop())
     }
 

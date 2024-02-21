@@ -15,6 +15,7 @@ import { storeToRefs } from 'pinia'
 import useDrag from './lib/drag'
 
 const { drag } = useDrag()
+drag.run()
 
 const { changePageType, getDeviceList, changeCameraRound } = useDevicesStore()
 const devicesStore = useDevicesStore()

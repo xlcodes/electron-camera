@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: electron-camera
+appId: top.xlcoder.app
+productName: 小林的摄像头
 directories:
   buildResources: build
 files:

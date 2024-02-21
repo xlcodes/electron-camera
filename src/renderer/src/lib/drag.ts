@@ -2,13 +2,8 @@ class Drag {
   private point: { x: number; y: number } = { x: 0, y: 0 }
   private body?: HTMLBodyElement
 
-  constructor() {
-    window.addEventListener('DOMContentLoaded', () => {
-      this.body = document.querySelector('body')!
-
-      this.body.addEventListener('mousedown', this.mouseDownEvent.bind(this))
-    })
-  }
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
 
   private mouseDownEvent(e: MouseEvent) {
     this.point = {
@@ -36,7 +31,10 @@ class Drag {
   }
 
   public run() {
-    console.log('run ===>')
+    window.addEventListener('DOMContentLoaded', () => {
+      this.body = document.querySelector('body')!
+      this.body.addEventListener('mousedown', this.mouseDownEvent.bind(this))
+    })
   }
 }
 
