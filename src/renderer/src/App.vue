@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import useDevicesStore, { PageTypeEnum } from './stores/useDevicesStore'
+import useDevicesStore from './stores/useDevicesStore'
+import { PageTypeEnum } from './common/enum'
 import Camera from './components/Camera.vue'
 import Setting from './components/Setting.vue'
 import { storeToRefs } from 'pinia'
@@ -16,7 +17,7 @@ const devicesStore = useDevicesStore()
 const { devicesData } = storeToRefs(devicesStore)
 
 const quit = () => {
-  window.api.quit()
+  window.api!.quit(devicesData.value.pageType as PageTypeEnum)
 }
 
 onMounted(async () => {

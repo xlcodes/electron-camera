@@ -1,5 +1,7 @@
 /// <reference types="vite/client" />
 
+import { PageTypeEnum } from './common/enum'
+
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
@@ -9,7 +11,7 @@ declare module '*.vue' {
 
 interface Window {
   api: {
-    quit: () => void
+    quit: (pageType: PageTypeEnum) => void
     drag: (point: { x: number; y: number }) => void
   }
 }

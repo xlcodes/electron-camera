@@ -21,7 +21,8 @@
 
 <script setup lang="ts">
 import { Setting as SettingIcon, VideoCamera } from '@element-plus/icons-vue'
-import useDevicesStore, { PageTypeEnum } from '../stores/useDevicesStore'
+import useDevicesStore from '../stores/useDevicesStore'
+import { PageTypeEnum } from '../common/enum'
 import { storeToRefs } from 'pinia'
 const { changePageType } = useDevicesStore()
 const devicesStore = useDevicesStore()

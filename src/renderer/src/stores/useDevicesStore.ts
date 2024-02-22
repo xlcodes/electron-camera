@@ -1,10 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
-
-export enum PageTypeEnum {
-  CAMERA = 'camera',
-  SETTING = 'setting'
-}
+import { PageTypeEnum } from '../common/enum'
 
 interface DevicesOpt {
   id: string // 选中设备ID

@@ -17,7 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import useDevicesStore, { PageTypeEnum } from '../stores/useDevicesStore'
+import useDevicesStore from '../stores/useDevicesStore'
+import { PageTypeEnum } from '../common/enum'
 import { storeToRefs } from 'pinia'
 import { Picture, PictureRounded, VideoPlay, VideoPause } from '@element-plus/icons-vue'
 

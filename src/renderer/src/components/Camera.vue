@@ -19,7 +19,8 @@
 <script setup lang="ts">
 // 获取当前设备的媒体输入和输出设备列表
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import useDevicesStore, { PageTypeEnum } from '../stores/useDevicesStore'
+import useDevicesStore from '../stores/useDevicesStore'
+import { PageTypeEnum } from '../common/enum'
 import { storeToRefs } from 'pinia'
 
 const videoRef = ref<HTMLVideoElement>()
