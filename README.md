@@ -1,4 +1,4 @@
-# electron-camera
+# 桌面摄像头软件
 
 An Electron application with Vue and TypeScript
 
